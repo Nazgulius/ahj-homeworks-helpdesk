@@ -1,8 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ./src/js/app.js
+;// ./src/js/app.js
 // TODO: write code here
 
 // comment this to pass build
@@ -13,7 +12,7 @@ function demo(value) {
   return `Demo: ${value}`;
 }
 console.log("app.js included");
-;// CONCATENATED MODULE: ./src/index.js
+;// ./src/index.js
 
 
 
