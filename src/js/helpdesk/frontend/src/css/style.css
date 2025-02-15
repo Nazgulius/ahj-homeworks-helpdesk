@@ -1,0 +1,13 @@
+body {
+    background-color: grey;
+}
+
+.btn_add_ticket {
+    padding: 5px 10px;
+    background-color: lightgreen;
+}
+
+.circle {
+    border: 2px solid;
+    border-radius: 50%;
+}

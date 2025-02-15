@@ -12,5 +12,12 @@ export default class HelpDesk {
 
   init() {
     console.info('init');
+
+    const btnAddTicket = document.querySelector('.btn_add_ticket');
+
+    btnAddTicket.addEventListener('click', (e) => {
+      console.log('click!');
+      
+    });
   }
 }
