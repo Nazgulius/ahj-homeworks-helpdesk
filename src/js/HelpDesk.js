@@ -17,19 +17,19 @@ export default class HelpDesk {
     const btnCensel = document.querySelector('.form_btn_censel');
     const mein = document.querySelector('.mein');
     const form = mein.querySelector('.form');
-    const titleInput = mein.querySelector('.form_title_1');
-    const textInput = mein.querySelector('.form_title_2');
+    // const titleInput = mein.querySelector('.form_title_1');
+    // const textInput = mein.querySelector('.form_title_2');
 
     // показать форму
     btnAddTicket.addEventListener('click', (e) => {
       e.preventDefault();
-      form.classList.remove('hidden');      
+      form.classList.remove('hidden');
     });
-    
+
     // скрыть форму
     btnCensel.addEventListener('click', (e) => {
       e.preventDefault();
-      form.classList.add('hidden');      
+      form.classList.add('hidden');
     });
 
     // основной слушатель формы
@@ -38,18 +38,15 @@ export default class HelpDesk {
 
       const xhr = new XMLHttpRequest();
 
-      xhr.onreadystatechange = function(e) {
-        if (xhr.readyState != 4) return;
-        
-        console.log(xhr.responseText);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
 
-      }
+        console.log(xhr.responseText);
+      };
 
       xhr.open('GET', 'http://localhost:7070/?method=allTickets');
-      
+
       xhr.send();
     });
-
-
   }
 }

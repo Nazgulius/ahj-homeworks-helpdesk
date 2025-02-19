@@ -7,4 +7,3 @@ const ticketService = new TicketService();
 const app = new HelpDesk(root, ticketService);
 
 app.init();
-
