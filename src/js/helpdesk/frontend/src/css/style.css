@@ -1,4 +1,4 @@
-.main {
+.mein {
   position: relative; 
 }
 
@@ -56,18 +56,23 @@
   text-align: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .form {
-  position: absolute;
-  display: flex;  
-  flex-direction: column;    
-  
+  position: absolute; 
   width: 400px;
-  height: 300px;
   border: 1px solid;
   left: 100px;
   top: 200px;
   background-color: lightblue;
   padding: 10px;
+}
+
+.form_body {
+  display: flex;
+  flex-direction: column;   
 }
 
 .form_title {
