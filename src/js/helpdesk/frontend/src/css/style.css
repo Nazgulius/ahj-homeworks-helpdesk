@@ -1,13 +1,87 @@
-body {
-    background-color: grey;
+.main {
+  position: relative; 
+}
+
+.ticket_list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;  
+  justify-content: center;
+
+  width: 500px;
+  border: 1px solid;
+  padding: 10px;
+}
+
+.ticket_item {
+  display: flex;
+  white-space: nowrap;
+  flex: auto;
+  justify-content: space-between;
+  border: 1px solid;
+  margin-bottom: 5px;
 }
 
 .btn_add_ticket {
-    padding: 5px 10px;
-    background-color: lightgreen;
+  padding: 5px 10px;
+  background-color: lightgreen;
+}
+
+.dot_status {
+  width: 40px;
+  margin: 5px;
 }
 
 .circle {
-    border: 2px solid;
-    border-radius: 50%;
+  border: 2px solid;
+  border-radius: 50%;
 }
+
+.ticket_title {
+  width: auto;
+}
+
+.ticket_data {
+  width: 50px;
+}
+
+.dot_edit {
+  width: 40px;
+  margin: 5px;
+}
+
+.dot_close {
+  width: 40px;
+  margin: 5px;  
+  text-align: center;
+}
+
+.form {
+  position: absolute;
+  display: flex;  
+  flex-direction: column;    
+  
+  width: 400px;
+  height: 300px;
+  border: 1px solid;
+  left: 100px;
+  top: 200px;
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.form_title {
+  text-align: center;
+}
+
+.form_button {
+  display: flex;  
+  flex-direction: row;   
+  justify-content: flex-end;
+  padding: 5px; 
+}
+
+.form_btn_censel {
+  margin-right: 5px;
+}
+
