@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>helpdesk</title>
-</head>
-<body>
-<h1>Hello, helpdesk!</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />    
+    <title>HelpDesk</title>
+  </head>
+  <body>
+    <div id="root">   </div>  
+    <div class="mein">
+      <h1 class="title">Hello helpdesk!</h1>
+      <button class="btn_add_ticket">Add ticket</button>
 
-</body>
+      <lu class="ticket_list">
+        <li class="ticket_item">
+          <div class="dot_status circle"></div>
+          <p class="ticket_title">title ticket</p>
+          <span class="ticket_data">Date: </span>
+          <div class="dot_edit circle"></div>
+          <div class="dot_close circle">X</div>          
+        </li>
+      
+        <li class="ticket_item">
+          <div class="dot_status circle"></div>
+          <p class="ticket_title">title ticket</p>
+          <span class="ticket_data">Date: </span>
+          <div class="dot_edit circle"></div>
+          <div class="dot_close circle">X</div>          
+        </li>
+      </lu>
+  
+      <form action="http://localhost:7070/" class="form hidden" method="POST">
+        <h3 class="form_title">Добавить тикет</h3>
+        <div class="form_body">
+          <span class="form_title_1">Кратное описание</span>
+          <input type="text" class="form_input_1">
+          <span class="form_title_2">Подробное описание</span>
+          <input type="text" class="form_input_2">
+        </div>
+        <div class="form_button">
+          <button class="form_btn_censel">Отмена</button>
+          <button class="form_btn_ok">ОК</button>
+        </div>
+      </form> 
+
+    </div>
+   
+
+    
+  </body>
 </html>

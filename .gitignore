@@ -1,5 +1,6 @@
 dist
 doc
+old
 
 # Logs
 logs
@@ -81,3 +82,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# IDE
+.idea

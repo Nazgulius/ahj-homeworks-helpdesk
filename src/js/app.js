@@ -1,11 +1,10 @@
-// TODO: write code here
+import HelpDesk from './HelpDesk';
+import TicketService from './TicketService';
 
-// comment this to pass build
-const unusedVariable = "variable";
+const root = document.getElementById('root');
 
-// for demonstration purpose only
-export default function demo(value) {
-  return `Demo: ${value}`;
-}
+const ticketService = new TicketService();
+const app = new HelpDesk(root, ticketService);
 
-console.log("app.js included");
+app.init();
+
