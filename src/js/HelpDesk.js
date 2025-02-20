@@ -44,7 +44,8 @@ export default class HelpDesk {
         console.log(xhr.responseText);
       };
 
-      xhr.open('GET', 'http://localhost:7070/?method=allTickets');
+      // xhr.open('GET', 'http://localhost:7070/?method=allTickets');
+      xhr.open('GET', 'https://ahj-homeworks-helpdesk-server.onrender.com/?method=allTickets');
 
       xhr.send();
     });
