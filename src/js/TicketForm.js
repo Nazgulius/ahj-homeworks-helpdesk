@@ -3,7 +3,7 @@
  * */
 export default class TicketForm {
   constructor() {
-    this.url = 'http://localhost:7070/';
+    this.url = 'https://ahj-homeworks-helpdesk-server.onrender.com';
   }
 
   createForm() {
