@@ -48,12 +48,14 @@
 .dot_edit {
   width: 40px;
   margin: 5px;
+  background-color: rgb(255, 255, 132);
 }
 
 .dot_close {
   width: 40px;
   margin: 5px;  
   text-align: center;
+  background-color: rgb(255, 132, 132);
 }
 
 .hidden {
