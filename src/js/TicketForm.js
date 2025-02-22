@@ -46,8 +46,10 @@ export default class TicketForm {
 
     const btnCensel = document.createElement('button');
     btnCensel.className = 'form_btn_censel';
+    btnCensel.textContent = 'Censel';
     const btnOk = document.createElement('button');
     btnOk.className = 'form_btn_ok';
+    btnOk.textContent = ' OK ';
 
     formButton.appendChild(btnCensel);
     formButton.appendChild(btnOk);

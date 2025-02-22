@@ -1,6 +1,8 @@
 /**
  *  Основной класс приложения
  * */
+import TicketForm from './TicketForm';
+
 export default class HelpDesk {
   constructor(container, ticketService) {
     if (!(container instanceof HTMLElement)) {
@@ -8,10 +10,13 @@ export default class HelpDesk {
     }
     this.container = container;
     this.ticketService = ticketService;
+    this.ticketForm = new TicketForm();
   }
 
   init() {
     console.info('init');
+    this.ticketForm.createForm();
+
 
     const btnAddTicket = document.querySelector('.btn_add_ticket');
     const btnCensel = document.querySelector('.form_btn_censel');
