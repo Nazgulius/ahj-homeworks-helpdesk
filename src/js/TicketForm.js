@@ -27,13 +27,15 @@ export default class TicketForm {
 
     const formInput1 = document.createElement('input');
     formInput1.className = 'form_input_1';
+    formInput1.type = 'text';
 
     const formSubTitle2 = document.createElement('span');
     formSubTitle2.className = 'form_title_2';
     formSubTitle2.textContent = 'Подробное описание';
-
+    
     const formInput2 = document.createElement('input');
     formInput2.className = 'form_input_2';
+    formInput2.type = 'text';
 
     formBody.appendChild(formSubTitle1);
     formBody.appendChild(formInput1);
