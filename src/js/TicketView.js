@@ -2,6 +2,9 @@
  *  Класс для отображения тикетов на странице.
  *  Он содержит методы для генерации разметки тикета.
  * */
+
+import TicketService from './TicketService';
+
 export default class TicketView {
   constructor(id, name, description, status, created) {
     this.id = id;
@@ -12,12 +15,6 @@ export default class TicketView {
   }
 
   createTicket(id, name, description, status, created) {
-    console.log(`${this.id} = id;
-${this.name} = name;
-${this.description} = description;
-${this.status} = status;
-${this.created} = created;`);
-
     const ticketItem = document.createElement('li');
     ticketItem.className = 'ticket_item';
 
@@ -30,7 +27,7 @@ ${this.created} = created;`);
 
     const ticketData = document.createElement('span');
     ticketData.className = 'ticket_data';
-    ticketData.textContent = 'Date: ' + created;
+    ticketData.textContent = 'Date: ' + this.formatDate(created);
     
     const dotEdit = document.createElement('div');
     dotEdit.className = 'dot_edit circle';
@@ -41,6 +38,12 @@ ${this.created} = created;`);
     dotCloseX.className = 'dot_close_x';
     dotCloseX.textContent = 'X';
 
+    dotClose.addEventListener('click', (d) => {
+      console.log('click');
+      new TicketService().delete(d.id, d);
+    });
+   
+
     ticketItem.appendChild(dotStatus);
     ticketItem.appendChild(ticketTitle);
     ticketItem.appendChild(ticketData);
@@ -49,4 +52,12 @@ ${this.created} = created;`);
     ticketItem.appendChild(dotClose);
     document.querySelector('.ticket_list').appendChild(ticketItem);
   }
+
+   formatDate(milliseconds) {  
+    const date = new Date(milliseconds);  
+    const day = date.getDate().toString().padStart(2, '0');  
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Месяц от 0 до 11  
+    const year = date.getFullYear().toString().slice(-2);  
+    return `${day}.${month}.${year}`;  
+  } 
 }

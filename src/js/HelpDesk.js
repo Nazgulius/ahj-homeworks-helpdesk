@@ -4,6 +4,7 @@
 import TicketForm from './TicketForm';
 import Ticket from './Ticket';
 import TicketView from './TicketView';
+import TicketService from './TicketService';
 
 export default class HelpDesk {
   constructor(container, ticketService) {
@@ -14,15 +15,17 @@ export default class HelpDesk {
     this.ticketService = ticketService;
     this.ticketForm = new TicketForm(); 
     this.ticketView = new TicketView();   
+    this.ticketService = new TicketService();
   }
 
   init() {
     console.info('init');
+
+    this.ticketService.list();
     this.ticketForm.createForm();
 
     const btnAddTicket = document.querySelector('.btn_add_ticket');
-    const btnCensel = document.querySelector('.form_btn_censel');
-    const mein = document.querySelector('.mein');
+    const btnCensel = document.querySelector('.form_btn_censel');    
     const form = document.querySelector('.form');
     let data;
 
@@ -41,7 +44,7 @@ export default class HelpDesk {
       form.querySelector('.form_input_2').value = '';
     });
     
-    let xhr = new XMLHttpRequest();
+    
     
     // основной слушатель формы
     form.addEventListener('submit', (e) => {
@@ -57,41 +60,42 @@ export default class HelpDesk {
         created: new Date(),
       });
 
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState !== 4) return;
-        console.log(xhr.responseText);
-      };
-
-      console.log(ticket);
-      let json = JSON.stringify(ticket);
-      console.log(json);
-
-      //xhr.open("POST", '/submit')
-      // xhr.open('GET', 'http://localhost:7070/?method=allTickets');
-      xhr.open('POST', 'https://ahj-homeworks-helpdesk-server.onrender.com/?method=createTicket');
-      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-      xhr.send(json);
+      this.ticketService.create(new Date(), ticket);
 
       form.classList.add('hidden');
       titleInput.value = '';
       textInput.value = '';
     });
 
-    xhr.addEventListener('load', () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          data = JSON.parse(xhr.responseText);
-          console.log(data);
-          if (data) {
-            this.ticketView.createTicket(data.id, data.name, data.description, data.status, data.created);             
-          } else {  
-            console.error('ticketData is undefined or null');  
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    });
+    // xhr.addEventListener('load', () => {
+    //   if (xhr.status >= 200 && xhr.status < 300) {
+    //     try {
+    //       data = JSON.parse(xhr.responseText);
+    //       console.log(data);
+    //       if (data) {
+    //         this.ticketView.createTicket(data.id, data.name, data.description, data.status, data.created);             
+    //       } else {  
+    //         console.error('ticketData is undefined or null');  
+    //       }
+    //     } catch (e) {
+    //       console.error(e);
+    //     }
+    //   }
+    // });
+    
+    
+   
+    
+      document.querySelectorAll('.dot_close').forEach((e) => {
+        e.addEventListener('click', (d) => {
+          console.log('click');
+          d.preventDefault();
+          this.ticketService.delete(d.id, d);
+        });
+      });
+      
+    
 
+    
   }
 }

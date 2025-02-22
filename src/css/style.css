@@ -8,7 +8,7 @@
   flex-direction: column;  
   justify-content: center;
 
-  width: 500px;
+  width: 700px;
   border: 1px solid;
   padding: 10px;
 }
@@ -18,7 +18,7 @@
   white-space: nowrap;
   flex: auto;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
   border: 1px solid;
   margin-bottom: 5px;
 }
@@ -30,6 +30,7 @@
 
 .dot_status {
   width: 40px;
+  height: 40px;
   margin: 5px;
 }
 
@@ -39,7 +40,14 @@
 }
 
 .ticket_title {
-  width: auto;
+  width: 300px;
+
+  /* Скрывает переполнение текста   */
+  overflow: hidden; 
+  /* Переносит длинные слова на следующую строку */  
+  word-wrap: break-word; 
+  /* Позволяет перенос строк и сохраняет нужные переносы */    
+  white-space: pre-wrap; 
 }
 
 .ticket_data {
@@ -48,15 +56,20 @@
 
 .dot_edit {
   width: 40px;
+  height: 40px;
   margin: 5px;
   background-color: rgb(255, 255, 132);
+  cursor: pointer;
 }
 
-.dot_close {
+.dot_close {    
+  display: flex;  
   width: 40px;
+  height: 40px;
   margin: 5px;  
   text-align: center;
   background-color: rgb(255, 132, 132);
+  cursor: pointer;
 }
 
 .dot_close_x {
