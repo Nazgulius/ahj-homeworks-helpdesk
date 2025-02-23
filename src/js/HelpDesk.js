@@ -87,28 +87,14 @@ export default class HelpDesk {
     
     
    
-    // слушатель удаления тикета
-    const dotClose = document.querySelectorAll('.dot_close');
-    console.log(dotClose);
-    dotClose.forEach((e) => {
-      e.addEventListener('click', (d) => {
-        console.log('click');
-        console.log(e);
-        console.log(d);
-
-        //d.preventDefault();
-        this.ticketService.delete(d.id, d);
-      });
-
-       
-    });
-
+    
+    // слушатель от боди для удаления тикета
     document.body.addEventListener('click', (event) => { 
       const dotClose = event.target.classList.contains('dot_close');
+      const dotCloseX = event.target.classList.contains('dot_close_x');
       const ticketItem = event.target.closest('.ticket_item');
-      if (dotClose && ticketItem) {  
+      if ((dotCloseX || dotClose) && ticketItem) {  
         console.log('click dot_close');  
-        console.log(event.target);  
 
         const listItem = listTicket.find((e) => e.id === ticketItem.id); 
         
@@ -122,9 +108,6 @@ export default class HelpDesk {
     }); 
       
     
-    for (let a of listTicket) {
-      console.log('listTicket ' + a);
-    }
 
     
   }
