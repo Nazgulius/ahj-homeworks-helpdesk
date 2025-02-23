@@ -5,6 +5,7 @@ import TicketForm from './TicketForm';
 import Ticket from './Ticket';
 import TicketView from './TicketView';
 import TicketService from './TicketService';
+import { listTicket } from './listTicket';
 
 export default class HelpDesk {
   constructor(container, ticketService) {
@@ -60,7 +61,8 @@ export default class HelpDesk {
         created: new Date(),
       });
 
-      this.ticketService.create(new Date(), ticket);
+      console.log(ticket);
+      this.ticketService.create(ticket);
 
       form.classList.add('hidden');
       titleInput.value = '';
@@ -85,16 +87,44 @@ export default class HelpDesk {
     
     
    
-    
-      document.querySelectorAll('.dot_close').forEach((e) => {
-        e.addEventListener('click', (d) => {
-          console.log('click');
-          d.preventDefault();
-          this.ticketService.delete(d.id, d);
-        });
+    // слушатель удаления тикета
+    const dotClose = document.querySelectorAll('.dot_close');
+    console.log(dotClose);
+    dotClose.forEach((e) => {
+      e.addEventListener('click', (d) => {
+        console.log('click');
+        console.log(e);
+        console.log(d);
+
+        //d.preventDefault();
+        this.ticketService.delete(d.id, d);
       });
+
+       
+    });
+
+    document.body.addEventListener('click', (event) => { 
+      const dotClose = event.target.classList.contains('dot_close');
+      const ticketItem = event.target.closest('.ticket_item');
+      if (dotClose && ticketItem) {  
+        console.log('click dot_close');  
+        console.log(event.target);  
+
+        const listItem = listTicket.find((e) => e.id === ticketItem.id); 
+        
+        if (listItem) {  
+          this.ticketService.delete(listItem.id);  
+          ticketItem.remove();
+        } else {  
+          console.error('Ticket not found in the list.');  
+        }  
+      }  
+    }); 
       
     
+    for (let a of listTicket) {
+      console.log('listTicket ' + a);
+    }
 
     
   }

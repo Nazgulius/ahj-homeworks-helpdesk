@@ -17,9 +17,15 @@ export default class TicketView {
   createTicket(id, name, description, status, created) {
     const ticketItem = document.createElement('li');
     ticketItem.className = 'ticket_item';
+    ticketItem.id = id;
 
     const dotStatus = document.createElement('div');
     dotStatus.className = 'dot_status circle';
+    if (status) {
+      dotStatus.background = 'green';
+    } else {
+      dotStatus.background = 'red';      
+    }
 
     const ticketTitle = document.createElement('p');
     ticketTitle.className = 'ticket_title';
@@ -36,13 +42,7 @@ export default class TicketView {
     dotClose.className = 'dot_close circle';
     const dotCloseX = document.createElement('span');
     dotCloseX.className = 'dot_close_x';
-    dotCloseX.textContent = 'X';
-
-    dotClose.addEventListener('click', (d) => {
-      console.log('click');
-      new TicketService().delete(d.id, d);
-    });
-   
+    dotCloseX.textContent = 'X';   
 
     ticketItem.appendChild(dotStatus);
     ticketItem.appendChild(ticketTitle);
