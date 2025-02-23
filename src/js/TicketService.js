@@ -29,6 +29,7 @@ export default class TicketService {
           const data = JSON.parse(xhr.responseText);
           console.log(data);
 
+          // записывам тикеты локально
           for (let e of data) {
             listTicket.push({
               id: e.id,
@@ -39,6 +40,7 @@ export default class TicketService {
             });
           }
           
+          // создаём тикеты на странице
           data.forEach((e) => {            
             new TicketView().createTicket(e.id, e.name, e.description, e.status, e.created);
           });
@@ -96,10 +98,10 @@ export default class TicketService {
   create(callback) {
     let xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState !== 4) return;
-      console.log(xhr.responseText);
-    };
+    // xhr.onreadystatechange = function () {
+    //   if (xhr.readyState !== 4) return;
+    //   console.log(xhr.responseText);
+    // };
 
     let json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
@@ -112,7 +114,7 @@ export default class TicketService {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const data = JSON.parse(xhr.responseText);
-          console.log(data);
+          console.log('полуичли data: ' + data);
           if (data) {
             new TicketView().createTicket(data.id, data.name, data.description, data.status, data.created);
             listTicket.push({
@@ -130,80 +132,47 @@ export default class TicketService {
         }
       }
     });
-
-    // return new Promise((resolve, reject) => {
-    //   xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4) {
-    //       if (xhr.status >= 200 && xhr.status < 300) {
-    //         try {
-    //           const data = JSON.parse(xhr.responseText);
-    //           console.log(data);
-    //           // Убедитесь, что вы обрабатываете только отдельный объект, а не массив  
-    //           if (data.id) {
-    //             new TicketView().createTicket(data.id, data.name, data.description, data.status, data.created);
-    //             resolve(data); // Успешный ответ  
-    //           } else {
-    //             console.error('Данные билета отсутствуют');
-    //             reject(new Error('Данные билета отсутствуют'));
-    //           }
-    //         } catch (e) {
-    //           console.error(e);
-    //           reject(e); // Ошибка парсинга  
-    //         }
-    //       } else {
-    //         reject(new Error(`Запрос не удался с кодом: ${xhr.status}`)); // Ошибка запроса  
-    //       }
-    //     }
-    //   };
-
-    //   let json = JSON.stringify(callback);
-
-    //   xhr.open('POST', this.urlLocal + '?method=createTicket');
-    //   xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    //   xhr.send(json); // Этот вызов уже будет обработан внутри Promise  
-    // });
   }
 
-  update(id, data, callback) {
+  update(id, callback) {
     let xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState !== 4) return;
-      console.log(xhr.responseText);
-    };
+    // xhr.onreadystatechange = function () {
+    //   if (xhr.readyState !== 4) return;
+    //   console.log(xhr.responseText);
+    // };
 
     let json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
 
-    xhr.open('POST', this.urlLocal + '?method=deleteById&id=' + id);
+    xhr.open('POST', this.urlLocal + '?method=updateById&id=' + id);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(json);
     
-    xhr.addEventListener('load', () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          const data = JSON.parse(xhr.responseText);
-          console.log(data);
-          if (data) {
-            new TicketView().createTicket(data.id, data.name, data.description, data.status, data.created);
-            listTicket.push({
-              id: data.id,
-              name: data.name,
-              description: data.description,
-              status: data.status,
-              created: data.created,
-            });
-          } else {  
-            console.error('ticketData is undefined or null');  
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    });
-
-    xhr.open('POST', this.urlLocal + '?method=updateById&id=' + id);
-    xhr.send();
+    // xhr.addEventListener('load', () => {
+    //   if (xhr.status >= 200 && xhr.status < 300) {
+    //     try {
+    //       const data = JSON.parse(xhr.responseText);
+    //       console.log('полуичли data: ' + data);
+    //       if (data) {
+    //         new TicketView().createTicket(data.id, data.name, data.description, data.status, data.created);
+    //         listTicket.push({
+    //           id: data.id,
+    //           name: data.name,
+    //           description: data.description,
+    //           status: data.status,
+    //           created: data.created,
+    //         });
+    //       } else {  
+    //         console.error('ticketData is undefined or null');  
+    //       }
+    //     } catch (e) {
+    //       console.error(e);
+    //     }
+    //   }
+    // });
+    
+    
   }
 
   delete(id) {
