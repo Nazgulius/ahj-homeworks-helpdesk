@@ -20,7 +20,7 @@ export default class TicketService {
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlLocal + '?method=allTickets');
+    xhr.open('GET', this.urlServer + '?method=allTickets');
     xhr.send();
 
     xhr.addEventListener('load', () => {
@@ -77,22 +77,37 @@ export default class TicketService {
     //       }  
     //     }  
     //   };  
-    //   xhr.open('GET', this.urlLocal + '?method=allTickets');  
+    //   xhr.open('GET', this.urlServer + '?method=allTickets');  
     //   xhr.send(); // Этот вызов уже будет обработан внутри Promise  
     // }); 
 
   }
 
-  get(id, callback) {
-    console.log(`get ${id} ${callback}`);
+  get(id) {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlLocal + '?method=ticketById&id=' + id);
+    xhr.open('GET', this.urlServer + '?method=ticketById&id=' + id);
     xhr.send();
+
+    xhr.addEventListener('load', () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          console.log('полуичли data: ' + data);
+          if (data) {
+            return data;
+          } else {  
+            console.error('data JSON.parse is undefined or null');  
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
   }
 
   create(callback) {
@@ -106,7 +121,7 @@ export default class TicketService {
     let json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
 
-    xhr.open('POST', this.urlLocal + '?method=createTicket');
+    xhr.open('POST', this.urlServer + '?method=createTicket');
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(json);
 
@@ -145,7 +160,7 @@ export default class TicketService {
     let json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
 
-    xhr.open('POST', this.urlLocal + '?method=updateById&id=' + id);
+    xhr.open('POST', this.urlServer + '?method=updateById&id=' + id);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(json);
     
@@ -183,7 +198,7 @@ export default class TicketService {
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlLocal + '?method=deleteById&id=' + id);
+    xhr.open('GET', this.urlServer + '?method=deleteById&id=' + id);
     xhr.send();
   }
 }
