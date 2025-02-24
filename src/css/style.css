@@ -1,9 +1,15 @@
 .mein {
   position: relative; 
+  flex-direction: column;  
+  
+}
+
+div {
+  display: flex;
 }
 
 .ticket_list {
-  display: flex;
+  
   flex-wrap: wrap;
   flex-direction: column;  
   justify-content: center;
@@ -14,18 +20,29 @@
 }
 
 .ticket_item {
-  display: flex;
-  white-space: nowrap;
-  flex: auto;
-  justify-content: space-between;
-  align-items: center;
+  width: 680px;
+  height: 50px;
+  flex-direction: column;  
   border: 1px solid;
   margin-bottom: 5px;
+}
+
+.ticket_item_head {
+  width: 680px;
+  height: 50px;
+  justify-content: space-between;
+  flex-direction: row;
+  white-space: nowrap;
   
+  align-items: center;
 }
 
 .btn_add_ticket {
+  
+  width: 120px;
+  height: 30px;
   padding: 5px 10px;
+  margin: 10px 0;
   background-color: lightgreen;
 }
 
@@ -53,7 +70,7 @@
 }
 
 .ticket_data {
-  width: 50px;
+  width: 55px;
 }
 
 .dot_edit {
@@ -76,6 +93,11 @@
 
 .dot_close_x {
   margin: auto;
+}
+
+.ticket_description { 
+  margin-top: 10px; 
+  text-align: center;
 }
 
 .hidden {

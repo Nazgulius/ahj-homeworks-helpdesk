@@ -15,9 +15,14 @@ export default class TicketView {
   }
 
   createTicket(id, name, description, status, created) {
-    const ticketItem = document.createElement('li');
+    const ticketItem = document.createElement('div');
     ticketItem.className = 'ticket_item';
     ticketItem.id = id;
+
+    const ticketItemHead = document.createElement('div');
+    ticketItemHead.className = 'ticket_item_head';
+
+   
 
     const dotStatus = document.createElement('div');
     dotStatus.className = 'dot_status circle';
@@ -44,12 +49,14 @@ export default class TicketView {
     dotCloseX.className = 'dot_close_x';
     dotCloseX.textContent = 'X';   
 
-    ticketItem.appendChild(dotStatus);
-    ticketItem.appendChild(ticketTitle);
-    ticketItem.appendChild(ticketData);
-    ticketItem.appendChild(dotEdit);
+
+    ticketItem.appendChild(ticketItemHead);
+    ticketItemHead.appendChild(dotStatus);
+    ticketItemHead.appendChild(ticketTitle);
+    ticketItemHead.appendChild(ticketData);
+    ticketItemHead.appendChild(dotEdit);
     dotClose.appendChild(dotCloseX);
-    ticketItem.appendChild(dotClose);
+    ticketItemHead.appendChild(dotClose);
     document.querySelector('.ticket_list').appendChild(ticketItem);
   }
 

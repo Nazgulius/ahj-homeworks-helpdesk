@@ -146,27 +146,39 @@ export default class HelpDesk {
       const ticketItem = event.target.classList.contains('ticket_item');
       const ticketItemDev = event.target.closest('.ticket_item');
       const ticketTitle = event.target.classList.contains('ticket_title');
+
       if (ticketItem || ticketTitle) {
-        console.log('ticket_item height');
+        console.log('ticket_item height ON');
         // ticketItemDev.style.height = 'auto';
         ticketItemDev.style.height = '100px';
+        console.log('ticketItemDev ' + ticketItem);
+        console.log('listTicket ' + listTicket);
 
-        const listItem = listTicket.find((e) => e.id === ticketItem.id);
+        const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
         console.log('listItem ' + listItem);
         //console.log('listItem.descriptio ' + listItem.descriptio);
 
+        let descriptionSpan = ticketItemDev.querySelector('.ticket_description');
+        if (!descriptionSpan) {
+          descriptionSpan = document.createElement('span');
+          descriptionSpan.className = 'ticket_description';
+          descriptionSpan.textContent = listItem.description;
+          ticketItemDev.appendChild(descriptionSpan);
+        } 
 
-        const descriptionSpan = document.createElement('span');
-        descriptionSpan.className = 'ticket_description';
-        //descriptionSpan.textContent = listItem.description;
 
-        ticketItemDev.appendChild(descriptionSpan);
+      } else { // если нажмаем не на тикет, то скрываем и удаляем подробное описание
+        console.log('ticket_item height OFF');
 
-      } else { // если нажмаем не на тикет, то скрываем подробное описание
-        console.log('ticket_item height');
-        const ticketItemDev = event.target.closest('.ticket_item');
-        ticketItemDev.style.height = '53px';
-        ticketItemDev.querySelector('.ticket_description').remove;
+        // Проверяем, имеется ли элемент .ticket_description и удаляем его, если есть  
+        const ticketItemDev = event.target.closest('.ticket_item');  
+        if (ticketItemDev) {  
+          ticketItemDev.style.height = '53px';  
+          const descriptionSpan = ticketItemDev.querySelector('.ticket_description');  
+          if (descriptionSpan) {  
+            descriptionSpan.remove(); // удаляем элемент
+          }  
+        }         
       }
     });
     
