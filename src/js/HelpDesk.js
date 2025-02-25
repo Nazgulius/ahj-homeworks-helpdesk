@@ -193,5 +193,34 @@ export default class HelpDesk {
       }  
     });
 
+
+
+// находим и меняем цвет статуса
+document.body.addEventListener('click', (event) => {
+  const dotStatus = event.target.classList.contains('dot_status');
+  if (dotStatus) {
+    const ticketItemDev = event.target.closest('.ticket_item');
+    
+    const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
+
+    let dotStatusDiv = ticketItemDev.querySelector('.dot_status');
+    if (dotStatusDiv) {
+      if (listItem.status) {
+        listItem.status = false;
+        dotStatusDiv.background = red;         
+        this.ticketService.update(listItem.id, listItem);
+      } else {
+        listItem.status = true;
+        dotStatusDiv.background = green;
+        this.ticketService.update(listItem.id, listItem);          
+      }
+    } 
   }
+});
+
+
+
+    
+
+  } // end init()
 }
