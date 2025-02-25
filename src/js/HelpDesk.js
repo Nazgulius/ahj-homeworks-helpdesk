@@ -143,44 +143,55 @@ export default class HelpDesk {
 
     // слушатель для просмотра подробностей тикета тикета
     document.body.addEventListener('click', (event) => {
-      const ticketItem = event.target.classList.contains('ticket_item');
       const ticketItemDev = event.target.closest('.ticket_item');
-      const ticketTitle = event.target.classList.contains('ticket_title');
 
-      if (ticketItem || ticketTitle) {
-        console.log('ticket_item height ON');
-        // ticketItemDev.style.height = 'auto';
-        ticketItemDev.style.height = '100px';
-        console.log('ticketItemDev ' + ticketItem);
-        console.log('listTicket ' + listTicket);
+      // Проверяем, является ли клик внутри тикета  
+      if (ticketItemDev) {
+        const ticketTitle = event.target.classList.contains('ticket_title');
+        const ticketItem = event.target.classList.contains('ticket_item_head');
 
-        const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
-        console.log('listItem ' + listItem);
-        //console.log('listItem.descriptio ' + listItem.descriptio);
+        if (ticketItem || ticketTitle) {
+        // if (ticketItemDev) {
+          console.log('ticket_item height ON');
+          // ticketItemDev.style.height = 'auto';
+          ticketItemDev.style.height = '100px';
 
-        let descriptionSpan = ticketItemDev.querySelector('.ticket_description');
-        if (!descriptionSpan) {
-          descriptionSpan = document.createElement('span');
-          descriptionSpan.className = 'ticket_description';
-          descriptionSpan.textContent = listItem.description;
-          ticketItemDev.appendChild(descriptionSpan);
-        } 
+          const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
 
+          let descriptionSpan = ticketItemDev.querySelector('.ticket_description');
+          if (!descriptionSpan) {
+            descriptionSpan = document.createElement('span');
+            descriptionSpan.className = 'ticket_description';
+            descriptionSpan.textContent = listItem.description;
+            ticketItemDev.appendChild(descriptionSpan);
+          } 
+        } else { // если нажмаем не на тикет, то скрываем и удаляем подробное описание
+          console.log('ticket_item height OFF');
 
-      } else { // если нажмаем не на тикет, то скрываем и удаляем подробное описание
-        console.log('ticket_item height OFF');
-
-        // Проверяем, имеется ли элемент .ticket_description и удаляем его, если есть  
-        const ticketItemDev = event.target.closest('.ticket_item');  
-        if (ticketItemDev) {  
-          ticketItemDev.style.height = '53px';  
-          const descriptionSpan = ticketItemDev.querySelector('.ticket_description');  
-          if (descriptionSpan) {  
-            descriptionSpan.remove(); // удаляем элемент
-          }  
-        }         
-      }
-    });
+          // Проверяем, имеется ли элемент .ticket_description и удаляем его, если есть  
+          //const ticketItemDev = event.target.closest('.ticket_item');
+          
+          // ticketItemDev.style.height = '53px';
+          // const descriptionSpan = ticketItemDev.querySelector('.ticket_description');
+          // if (descriptionSpan) {
+          //   descriptionSpan.remove(); // удаляем элемент
+          // }     
+          return;     
+        }
+      } else { // Клик вне элемента тикета  
+        console.log('ticket_item height OFF');  
     
+        // Закрываем все тикеты  
+        const allTicketItems = document.querySelectorAll('.ticket_item');  
+        allTicketItems.forEach(ticketItem => {  
+          ticketItem.style.height = '53px';  
+          const descriptionSpan = ticketItem.querySelector('.ticket_description');  
+          if (descriptionSpan) {  
+            descriptionSpan.remove(); // удаляем элемент  
+          }  
+        });  
+      }  
+    });
+
   }
 }
