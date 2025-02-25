@@ -1,5 +1,3 @@
 // тут хранятся все списки
 
-export let listTicket = [
-  
-];
+export let listTicket = [];

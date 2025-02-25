@@ -32,7 +32,7 @@ export default class TicketForm {
     const formSubTitle2 = document.createElement('span');
     formSubTitle2.className = 'form_title_2';
     formSubTitle2.textContent = 'Подробное описание';
-    
+
     const formInput2 = document.createElement('textarea');
     formInput2.className = 'form_input_2';
     formInput2.rows = '10';
@@ -48,7 +48,7 @@ export default class TicketForm {
 
     const btnCensel = document.createElement('button');
     btnCensel.className = 'form_btn_censel';
-    btnCensel.textContent = 'Censel';
+    btnCensel.textContent = 'Cansel';
     const btnOk = document.createElement('button');
     btnOk.className = 'form_btn_ok';
     btnOk.textContent = ' OK ';
@@ -61,7 +61,7 @@ export default class TicketForm {
   }
 
 
-  editForm() {    
+  editForm() {
     const form = document.createElement('form');
     form.className = 'form hidden edit_form';
     form.method = 'POST';
@@ -87,7 +87,7 @@ export default class TicketForm {
     const formSubTitle2 = document.createElement('span');
     formSubTitle2.className = 'form_title_2';
     formSubTitle2.textContent = 'Подробное описание';
-    
+
     const formInput2 = document.createElement('textarea');
     formInput2.className = 'form_input_2';
     formInput2.rows = '10';
@@ -103,7 +103,7 @@ export default class TicketForm {
 
     const btnCensel = document.createElement('button');
     btnCensel.className = 'form_btn_censel';
-    btnCensel.textContent = 'Censel';
+    btnCensel.textContent = 'Cansel';
     const btnOk = document.createElement('button');
     btnOk.className = 'form_btn_ok';
     btnOk.textContent = ' OK ';

@@ -5,7 +5,7 @@
 }
 
 body {  
-  height: 100vh;
+  height: 100vh;  
 }
 
 div {
@@ -20,6 +20,7 @@ div {
 
   width: 700px;
   border: 1px solid;
+  border-radius: 10px;
   padding: 10px;
 }
 
@@ -28,6 +29,7 @@ div {
   height: 50px;
   flex-direction: column;  
   border: 1px solid;
+  border-radius: 10px;
   margin-bottom: 5px;
 }
 
@@ -48,6 +50,7 @@ div {
   padding: 5px 10px;
   margin: 10px 0;
   background-color: lightgreen;
+  border-radius: 10px;
 }
 
 .dot_status {
@@ -116,6 +119,7 @@ div {
   top: 200px;
   background-color: lightblue;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .form_body {
@@ -127,7 +131,7 @@ div {
   text-align: center;
 }
 
-.form_button {
+.form_button .pop_button {
   display: flex;  
   flex-direction: row;   
   justify-content: flex-end;
@@ -135,6 +139,26 @@ div {
 }
 
 .form_btn_censel {
+  margin-right: 5px;
+}
+
+.pop_del {
+  position: absolute; 
+  width: 400px;
+  
+  border: 1px solid;
+  left: 100px;
+  top: 200px;
+  background-color: lightgoldenrodyellow;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.pop_del_title {
+  text-align: center;
+}
+
+.pop_btn_cansel {
   margin-right: 5px;
 }
 

@@ -5,6 +5,7 @@ import TicketForm from './TicketForm';
 import Ticket from './Ticket';
 import TicketView from './TicketView';
 import TicketService from './TicketService';
+import TicketDelete from './TicketDelete';
 import { listTicket } from './listTicket';
 
 export default class HelpDesk {
@@ -17,6 +18,7 @@ export default class HelpDesk {
     this.ticketForm = new TicketForm();
     this.ticketView = new TicketView();
     this.ticketService = new TicketService();
+    this.popUpDel = new TicketDelete();
   }
 
   init() {
@@ -25,11 +27,14 @@ export default class HelpDesk {
     this.ticketService.list();
     this.ticketForm.createForm();
     this.ticketForm.editForm();
+    this.popUpDel.createPopDel();
 
     const btnAddTicket = document.querySelector('.btn_add_ticket');
     const btnCensel = document.querySelector('.form_btn_censel');
     const form = document.querySelector('.create_form');
     const editForm = document.querySelector('.edit_form');
+    const popDel = document.querySelector('.pop_del');
+
 
     // показать форму
     btnAddTicket.addEventListener('click', (e) => {
@@ -79,8 +84,24 @@ export default class HelpDesk {
         const listItem = listTicket.find((e) => e.id === ticketItem.id);
 
         if (listItem) {
-          this.ticketService.delete(listItem.id);
-          ticketItem.remove();
+          console.log('listItem ok');
+
+
+          popDel.classList.remove('hidden');
+
+          // слушатель на удаление - ОК
+          document.querySelector('.pop_btn_ok').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.ticketService.delete(listItem.id);
+            ticketItem.remove();
+            popDel.classList.add('hidden');
+          });
+
+          // слушатель на удаление - cancel
+          document.querySelector('.pop_btn_cansel').addEventListener('click', (e) => {
+            e.preventDefault();
+            popDel.classList.add('hidden');
+          });
         } else {
           console.error('Ticket not found in the list.');
         }
@@ -151,7 +172,7 @@ export default class HelpDesk {
         const ticketItem = event.target.classList.contains('ticket_item_head');
 
         if (ticketItem || ticketTitle) {
-        // if (ticketItemDev) {
+          // if (ticketItemDev) {
           console.log('ticket_item height ON');
           // ticketItemDev.style.height = 'auto';
           ticketItemDev.style.height = '100px';
@@ -164,63 +185,49 @@ export default class HelpDesk {
             descriptionSpan.className = 'ticket_description';
             descriptionSpan.textContent = listItem.description;
             ticketItemDev.appendChild(descriptionSpan);
-          } 
+          }
         } else { // если нажмаем не на тикет, то скрываем и удаляем подробное описание
           console.log('ticket_item height OFF');
-
-          // Проверяем, имеется ли элемент .ticket_description и удаляем его, если есть  
-          //const ticketItemDev = event.target.closest('.ticket_item');
           
-          // ticketItemDev.style.height = '53px';
-          // const descriptionSpan = ticketItemDev.querySelector('.ticket_description');
-          // if (descriptionSpan) {
-          //   descriptionSpan.remove(); // удаляем элемент
-          // }     
-          return;     
+          return;
         }
       } else { // Клик вне элемента тикета  
-        console.log('ticket_item height OFF');  
-    
+        console.log('ticket_item height OFF');
+
         // Закрываем все тикеты  
-        const allTicketItems = document.querySelectorAll('.ticket_item');  
-        allTicketItems.forEach(ticketItem => {  
-          ticketItem.style.height = '53px';  
-          const descriptionSpan = ticketItem.querySelector('.ticket_description');  
-          if (descriptionSpan) {  
+        const allTicketItems = document.querySelectorAll('.ticket_item');
+        allTicketItems.forEach(ticketItem => {
+          ticketItem.style.height = '53px';
+          const descriptionSpan = ticketItem.querySelector('.ticket_description');
+          if (descriptionSpan) {
             descriptionSpan.remove(); // удаляем элемент  
-          }  
-        });  
-      }  
+          }
+        });
+      }
     });
 
+    // находим и меняем цвет статуса
+    document.body.addEventListener('click', (event) => {
+      const dotStatus = event.target.classList.contains('dot_status');
+      if (dotStatus) {
+        const ticketItemDev = event.target.closest('.ticket_item');
 
+        const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
 
-// находим и меняем цвет статуса
-document.body.addEventListener('click', (event) => {
-  const dotStatus = event.target.classList.contains('dot_status');
-  if (dotStatus) {
-    const ticketItemDev = event.target.closest('.ticket_item');
-    
-    const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
-
-    let dotStatusDiv = ticketItemDev.querySelector('.dot_status');
-    if (dotStatusDiv) {
-      if (listItem.status) {
-        listItem.status = false;
-        dotStatusDiv.background = red;         
-        this.ticketService.update(listItem.id, listItem);
-      } else {
-        listItem.status = true;
-        dotStatusDiv.background = green;
-        this.ticketService.update(listItem.id, listItem);          
+        let dotStatusDiv = ticketItemDev.querySelector('.dot_status');
+        if (dotStatusDiv) {
+          if (listItem.status) {
+            listItem.status = false;
+            dotStatusDiv.style.background = 'red';
+            this.ticketService.update(listItem.id, listItem);
+          } else {
+            listItem.status = true;
+            dotStatusDiv.style.background = 'green';
+            this.ticketService.update(listItem.id, listItem);
+          }
+        }
       }
-    } 
-  }
-});
-
-
-
-    
+    });
 
   } // end init()
 }

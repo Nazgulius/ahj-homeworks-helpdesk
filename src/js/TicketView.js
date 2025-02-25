@@ -3,8 +3,6 @@
  *  Он содержит методы для генерации разметки тикета.
  * */
 
-import TicketService from './TicketService';
-
 export default class TicketView {
   constructor(id, name, description, status, created) {
     this.id = id;
@@ -22,14 +20,14 @@ export default class TicketView {
     const ticketItemHead = document.createElement('div');
     ticketItemHead.className = 'ticket_item_head';
 
-   
+
 
     const dotStatus = document.createElement('div');
     dotStatus.className = 'dot_status circle';
     if (status) {
-      dotStatus.background = 'green';
+      dotStatus.style.background = 'green';
     } else {
-      dotStatus.background = 'red';      
+      dotStatus.style.background = 'red';
     }
 
     const ticketTitle = document.createElement('p');
@@ -39,7 +37,7 @@ export default class TicketView {
     const ticketData = document.createElement('span');
     ticketData.className = 'ticket_data';
     ticketData.textContent = 'Date: ' + this.formatDate(created);
-    
+
     const dotEdit = document.createElement('div');
     dotEdit.className = 'dot_edit circle';
 
@@ -47,7 +45,7 @@ export default class TicketView {
     dotClose.className = 'dot_close circle';
     const dotCloseX = document.createElement('span');
     dotCloseX.className = 'dot_close_x';
-    dotCloseX.textContent = 'X';   
+    dotCloseX.textContent = 'X';
 
 
     ticketItem.appendChild(ticketItemHead);
@@ -60,11 +58,11 @@ export default class TicketView {
     document.querySelector('.ticket_list').appendChild(ticketItem);
   }
 
-   formatDate(milliseconds) {  
-    const date = new Date(milliseconds);  
-    const day = date.getDate().toString().padStart(2, '0');  
+  formatDate(milliseconds) {
+    const date = new Date(milliseconds);
+    const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Месяц от 0 до 11  
-    const year = date.getFullYear().toString().slice(-2);  
-    return `${day}.${month}.${year}`;  
-  } 
+    const year = date.getFullYear().toString().slice(-2);
+    return `${day}.${month}.${year}`;
+  }
 }
