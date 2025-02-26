@@ -60,7 +60,6 @@ export default class TicketForm {
     document.querySelector('.mein').appendChild(form); // крепим форму к mein
   }
 
-
   editForm() {
     const form = document.createElement('form');
     form.className = 'form hidden edit_form';
@@ -114,5 +113,4 @@ export default class TicketForm {
 
     document.querySelector('.mein').appendChild(form); // крепим форму к mein
   }
-
 }

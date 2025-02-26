@@ -20,8 +20,6 @@ export default class TicketView {
     const ticketItemHead = document.createElement('div');
     ticketItemHead.className = 'ticket_item_head';
 
-
-
     const dotStatus = document.createElement('div');
     dotStatus.className = 'dot_status circle';
     if (status) {
@@ -36,7 +34,7 @@ export default class TicketView {
 
     const ticketData = document.createElement('span');
     ticketData.className = 'ticket_data';
-    ticketData.textContent = 'Date: ' + this.formatDate(created);
+    ticketData.textContent = `Date: ${this.formatDate(created)}`;
 
     const dotEdit = document.createElement('div');
     dotEdit.className = 'dot_edit circle';
@@ -46,7 +44,6 @@ export default class TicketView {
     const dotCloseX = document.createElement('span');
     dotCloseX.className = 'dot_close_x';
     dotCloseX.textContent = 'X';
-
 
     ticketItem.appendChild(ticketItemHead);
     ticketItemHead.appendChild(dotStatus);
@@ -61,7 +58,7 @@ export default class TicketView {
   formatDate(milliseconds) {
     const date = new Date(milliseconds);
     const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Месяц от 0 до 11  
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Месяц от 0 до 11
     const year = date.getFullYear().toString().slice(-2);
     return `${day}.${month}.${year}`;
   }

@@ -4,7 +4,7 @@
  * */
 
 import TicketView from './TicketView';
-import { listTicket } from './listTicket';
+import listTicket from './listTicket';
 
 export default class TicketService {
   constructor() {
@@ -20,7 +20,7 @@ export default class TicketService {
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlServer + '?method=allTickets');
+    xhr.open('GET', `${this.urlServer}?method=allTickets`);
     xhr.send();
 
     xhr.addEventListener('load', () => {
@@ -30,7 +30,7 @@ export default class TicketService {
           console.log(data);
 
           // записывам тикеты локально
-          for (let e of data) {
+          for (const e of data) {
             listTicket.push({
               id: e.id,
               name: e.name,
@@ -39,9 +39,9 @@ export default class TicketService {
               created: e.created,
             });
           }
-          
+
           // создаём тикеты на странице
-          data.forEach((e) => {            
+          data.forEach((e) => {
             new TicketView().createTicket(e.id, e.name, e.description, e.status, e.created);
           });
         } catch (e) {
@@ -58,33 +58,33 @@ export default class TicketService {
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlServer + '?method=ticketById&id=' + id);
+    xhr.open('GET', `${this.urlServer}?method=ticketById&id=${id}`);
     xhr.send();
 
     xhr.addEventListener('load', () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const data = JSON.parse(xhr.responseText);
-          console.log('полуичли data: ' + data);
+          console.log(`полуичли data: ${data}`);
           if (data) {
             return data;
-          } else {  
-            console.error('data JSON.parse is undefined or null');  
           }
+          console.error('data JSON.parse is undefined or null');
         } catch (e) {
           console.error(e);
         }
       }
+      return console.log('Не получили ошибку от 200 до 300');
     });
   }
 
   create(callback) {
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
 
-    let json = JSON.stringify(callback);
+    const json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
 
-    xhr.open('POST', this.urlServer + '?method=createTicket');
+    xhr.open('POST', `${this.urlServer}?method=createTicket`);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(json);
 
@@ -92,7 +92,7 @@ export default class TicketService {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const data = JSON.parse(xhr.responseText);
-          console.log('полуичли data: ' + data);
+          console.log(`полуичли data: ${data}`);
           if (data) {
             new TicketView().createTicket(data.id, data.name, data.description, data.status, data.created);
             listTicket.push({
@@ -102,8 +102,8 @@ export default class TicketService {
               status: data.status,
               created: data.created,
             });
-          } else {  
-            console.error('ticketData is undefined or null');  
+          } else {
+            console.error('ticketData is undefined or null');
           }
         } catch (e) {
           console.error(e);
@@ -113,25 +113,25 @@ export default class TicketService {
   }
 
   update(id, callback) {
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
 
-    let json = JSON.stringify(callback);
+    const json = JSON.stringify(callback);
     console.log('Отправляемые данные:', json);
 
-    xhr.open('POST', this.urlServer + '?method=updateById&id=' + id);
+    xhr.open('POST', `${this.urlServer}?method=updateById&id=${id}`);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(json);
   }
 
   delete(id) {
-    console.log('delete id ' + id);
+    console.log(`delete id ${id}`);
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
       console.log(xhr.responseText);
     };
 
-    xhr.open('GET', this.urlServer + '?method=deleteById&id=' + id);
+    xhr.open('GET', `${this.urlServer}?method=deleteById&id=${id}`);
     xhr.send();
   }
 }

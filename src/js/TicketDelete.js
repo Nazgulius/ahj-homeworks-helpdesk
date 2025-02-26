@@ -1,8 +1,4 @@
 export default class TicketDelete {
-  constructor() {
-
-  }
-
   createPopDel() {
     const popDel = document.createElement('dev');
     popDel.className = 'pop_del hidden';
@@ -32,7 +28,6 @@ export default class TicketDelete {
     popButton.appendChild(btnCensel);
     popButton.appendChild(btnOk);
     popDel.appendChild(popButton);
-
 
     document.querySelector('.mein').appendChild(popDel); // крепим pop к mein
   }

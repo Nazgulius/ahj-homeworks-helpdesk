@@ -6,7 +6,7 @@ import Ticket from './Ticket';
 import TicketView from './TicketView';
 import TicketService from './TicketService';
 import TicketDelete from './TicketDelete';
-import { listTicket } from './listTicket';
+import listTicket from './listTicket';
 
 export default class HelpDesk {
   constructor(container, ticketService) {
@@ -35,13 +35,11 @@ export default class HelpDesk {
     const editForm = document.querySelector('.edit_form');
     const popDel = document.querySelector('.pop_del');
 
-
     // показать форму
     btnAddTicket.addEventListener('click', (e) => {
       e.preventDefault();
       form.classList.remove('hidden');
     });
-
 
     // скрыть форму
     btnCensel.addEventListener('click', (e) => {
@@ -86,7 +84,6 @@ export default class HelpDesk {
         if (listItem) {
           console.log('listItem ok');
 
-
           popDel.classList.remove('hidden');
 
           // слушатель на удаление - ОК
@@ -124,21 +121,21 @@ export default class HelpDesk {
           editForm.querySelector('.form_input_1').value = listItem.name;
           editForm.querySelector('.form_input_2').value = listItem.description;
 
-          // Удалим ранее добавленные обработчики  
+          // Удалим ранее добавленные обработчики
           const cancelButton = editForm.querySelector('.form_btn_censel');
           const okButton = editForm.querySelector('.form_btn_ok');
 
-          // Убедимся, что предыдущие обработчики не остаются  
+          // Убедимся, что предыдущие обработчики не остаются
           cancelButton.replaceWith(cancelButton.cloneNode(true));
           okButton.replaceWith(okButton.cloneNode(true));
 
-          editForm.querySelector('.form_btn_censel').addEventListener('click', e => {
+          editForm.querySelector('.form_btn_censel').addEventListener('click', (e) => {
             e.preventDefault();
             editForm.classList.add('hidden'); // скрыть форму
           });
 
           // слушатель на кнопку "OK" в окне для изменений
-          editForm.querySelector('.form_btn_ok').addEventListener('click', e => {
+          editForm.querySelector('.form_btn_ok').addEventListener('click', (e) => {
             e.preventDefault();
             // записываем локально
             listItem.name = editForm.querySelector('.form_input_1').value;
@@ -151,22 +148,20 @@ export default class HelpDesk {
 
             listItem.description = editForm.querySelector('.form_input_2').value;
 
-            this.ticketService.update(listItem.id, listItem);  // отправляем на сервер
+            this.ticketService.update(listItem.id, listItem); // отправляем на сервер
             editForm.classList.add('hidden'); // скрыть форму
           });
-
         } else {
           console.error('Ticket not found in the list.');
         }
       }
     });
 
-
     // слушатель для просмотра подробностей тикета тикета
     document.body.addEventListener('click', (event) => {
       const ticketItemDev = event.target.closest('.ticket_item');
 
-      // Проверяем, является ли клик внутри тикета  
+      // Проверяем, является ли клик внутри тикета
       if (ticketItemDev) {
         const ticketTitle = event.target.classList.contains('ticket_title');
         const ticketItem = event.target.classList.contains('ticket_item_head');
@@ -186,21 +181,21 @@ export default class HelpDesk {
             descriptionSpan.textContent = listItem.description;
             ticketItemDev.appendChild(descriptionSpan);
           }
-        } else { // если нажмаем не на тикет, то скрываем и удаляем подробное описание
+        } else {
+          // если нажмаем не на тикет, то скрываем и удаляем подробное описание
           console.log('ticket_item height OFF');
-          
-          return;
         }
-      } else { // Клик вне элемента тикета  
+      } else {
+        // Клик вне элемента тикета
         console.log('ticket_item height OFF');
 
-        // Закрываем все тикеты  
+        // Закрываем все тикеты
         const allTicketItems = document.querySelectorAll('.ticket_item');
-        allTicketItems.forEach(ticketItem => {
+        allTicketItems.forEach((ticketItem) => {
           ticketItem.style.height = '53px';
           const descriptionSpan = ticketItem.querySelector('.ticket_description');
           if (descriptionSpan) {
-            descriptionSpan.remove(); // удаляем элемент  
+            descriptionSpan.remove(); // удаляем элемент
           }
         });
       }
@@ -214,7 +209,7 @@ export default class HelpDesk {
 
         const listItem = listTicket.find((e) => e.id === ticketItemDev.id);
 
-        let dotStatusDiv = ticketItemDev.querySelector('.dot_status');
+        const dotStatusDiv = ticketItemDev.querySelector('.dot_status');
         if (dotStatusDiv) {
           if (listItem.status) {
             listItem.status = false;
@@ -228,6 +223,5 @@ export default class HelpDesk {
         }
       }
     });
-
   } // end init()
 }

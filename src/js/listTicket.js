@@ -1,3 +1,5 @@
 // тут хранятся все списки
 
-export let listTicket = [];
+const listTicket = [];
+
+export default listTicket;
