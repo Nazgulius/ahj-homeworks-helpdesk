@@ -1,35 +1,63 @@
 .mein {
   position: relative; 
+  flex-direction: column;  
+  
+}
+
+body {  
+  height: 100vh;  
+}
+
+div {
+  display: flex;
 }
 
 .ticket_list {
-  display: flex;
+  
   flex-wrap: wrap;
   flex-direction: column;  
   justify-content: center;
 
-  width: 500px;
+  width: 700px;
   border: 1px solid;
+  border-radius: 10px;
   padding: 10px;
 }
 
 .ticket_item {
-  display: flex;
-  white-space: nowrap;
-  flex: auto;
-  justify-content: space-between;
+  width: 680px;
+  height: 50px;
+  flex-direction: column;  
   border: 1px solid;
+  border-radius: 10px;
   margin-bottom: 5px;
 }
 
+.ticket_item_head {
+  width: 680px;
+  height: 50px;
+  justify-content: space-between;
+  flex-direction: row;
+  white-space: nowrap;
+  
+  align-items: center;
+}
+
 .btn_add_ticket {
+  
+  width: 120px;
+  height: 30px;
   padding: 5px 10px;
+  margin: 10px 0;
   background-color: lightgreen;
+  border-radius: 10px;
 }
 
 .dot_status {
   width: 40px;
+  height: 40px;
   margin: 5px;
+  background-color: rgb(211, 210, 210);
 }
 
 .circle {
@@ -38,24 +66,45 @@
 }
 
 .ticket_title {
-  width: auto;
+  width: 300px;
+
+  /* Скрывает переполнение текста   */
+  overflow: hidden; 
+  /* Переносит длинные слова на следующую строку */  
+  word-wrap: break-word; 
+  /* Позволяет перенос строк и сохраняет нужные переносы */    
+  white-space: pre-wrap; 
 }
 
 .ticket_data {
-  width: 50px;
+  width: 55px;
 }
 
 .dot_edit {
   width: 40px;
+  height: 40px;
   margin: 5px;
   background-color: rgb(255, 255, 132);
+  cursor: pointer;
 }
 
-.dot_close {
+.dot_close {    
+  display: flex;  
   width: 40px;
+  height: 40px;
   margin: 5px;  
   text-align: center;
   background-color: rgb(255, 132, 132);
+  cursor: pointer;
+}
+
+.dot_close_x {
+  margin: auto;
+}
+
+.ticket_description { 
+  margin-top: 10px; 
+  text-align: center;
 }
 
 .hidden {
@@ -70,6 +119,7 @@
   top: 200px;
   background-color: lightblue;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .form_body {
@@ -81,7 +131,7 @@
   text-align: center;
 }
 
-.form_button {
+.form_button .pop_button {
   display: flex;  
   flex-direction: row;   
   justify-content: flex-end;
@@ -89,6 +139,26 @@
 }
 
 .form_btn_censel {
+  margin-right: 5px;
+}
+
+.pop_del {
+  position: absolute; 
+  width: 400px;
+  
+  border: 1px solid;
+  left: 100px;
+  top: 200px;
+  background-color: lightgoldenrodyellow;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.pop_del_title {
+  text-align: center;
+}
+
+.pop_btn_cansel {
   margin-right: 5px;
 }
 
