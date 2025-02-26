@@ -8,3 +8,5 @@ https://nazgulius.github.io/ahj-homeworks-helpdesk/
 
 server repo  
 https://github.com/Nazgulius/ahj-homeworks-helpdesk-server  
+
+!!! Your free instance will spin down with inactivity, which can delay requests by 50 seconds or more. !!!  
